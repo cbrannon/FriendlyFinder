@@ -178,12 +178,9 @@
                     "photo": "PhotoUrl",
                     "scores": ["5","1","4","4","5","1","2","5","4","1"]
                 }
-
+                console.log(userData);
                 $.post("http://localhost:8080/api/friends", userData, function(data){
-                    if(data==='done')
-                    {
-                        alert("login success");
-                    }
+                    console.log(data);
                 });
                 $("#myModal").modal();
             });
