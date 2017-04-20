@@ -176,9 +176,9 @@
                 var userData = {
                     "name": $("#name").val(),
                     "photo": $("#photo").val(),
-                    "scores": [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(),
-                               $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(),
-                               $("#question9").val(), $("#question10").val()]
+                    "scores": [$("#question1").val()[0], $("#question2").val()[0], $("#question3").val()[0], $("#question4").val()[0],
+                               $("#question5").val()[0], $("#question6").val()[0], $("#question7").val()[0], $("#question8").val()[0],
+                               $("#question9").val()[0], $("#question10").val()[0]]
                 }
                 console.log(userData);
                 $.post("http://localhost:8080/api/friends", userData, function(data){

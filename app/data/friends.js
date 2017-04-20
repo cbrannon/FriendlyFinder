@@ -1,1 +1,1 @@
-[{"name":"","photo":"","scores":["1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)"]}]
+[{"name":"","photo":"","scores":["1","1","1","1","1","1","1","1","1","1"]}]
