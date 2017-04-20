@@ -19,14 +19,14 @@
                 <h1 id="title">Survey Questions</h1>
                 <hr>
                 <h2>About You</h2>
-                <form>
+                <form action="http://localhost:8080" method="POST">
                     <div class="form-group">
                         <label for="name">Name (Required)</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="nameInput">
+                        <input type="text" class="form-control" id="name" aria-describedby="nameInput" required="true">
                     </div>
                     <div class="form-group">
                         <label for="photo">Link to Photo Image (Required)</label>
-                        <input type="text" class="form-control" id="photo" aria-describedby="photoInput">
+                        <input type="text" class="form-control" id="photo" aria-describedby="photoInput" required="true">
                     </div>
                     <hr>
                     <h2>Question 1</h2>
@@ -173,13 +173,14 @@
         $(document).ready(() => {
             $("#submit").on("click", (event) => {
                 event.preventDefault();
-                let userData = {
+                var userData = {
                     "name": "Cody",
                     "photo": "PhotoUrl",
                     "scores": ["5","1","4","4","5","1","2","5","4","1"]
                 }
                 console.log(userData);
                 $.post("http://localhost:8080/api/friends", userData, function(data){
+                    console.log("Test");
                     console.log(data);
                 });
                 $("#myModal").modal();
