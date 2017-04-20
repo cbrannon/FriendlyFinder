@@ -1,1 +1,1 @@
-[{"foo": "bar"}]
+[{"name":"","photo":"","scores":["1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)","1 (Strongly Disagree)"]}]

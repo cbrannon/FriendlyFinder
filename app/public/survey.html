@@ -171,20 +171,22 @@
     </div>
     <script>
         $(document).ready(() => {
-            // $("#submit").on("click", (event) => {
-            //     event.preventDefault();
-            //     var userData = {
-            //         "name": "Cody",
-            //         "photo": "PhotoUrl",
-            //         "scores": ["5","1","4","4","5","1","2","5","4","1"]
-            //     }
-            //     console.log(userData);
-            //     $.post("http://localhost:8080/api/friends", userData, function(data){
-            //         console.log("Test");
-            //         console.log(data);
-            //     });
-            //     $("#myModal").modal();
-            // });
+            $("#submit").on("click", (event) => {
+                event.preventDefault();
+                var userData = {
+                    "name": $("#name").val(),
+                    "photo": $("#photo").val(),
+                    "scores": [$("#question1").val(), $("#question2").val(), $("#question3").val(), $("#question4").val(),
+                               $("#question5").val(), $("#question6").val(), $("#question7").val(), $("#question8").val(),
+                               $("#question9").val(), $("#question10").val()]
+                }
+                console.log(userData);
+                $.post("http://localhost:8080/api/friends", userData, function(data){
+                    console.log("Test");
+                    console.log(data);
+                });
+                $("#myModal").modal();
+            });
         });
     </script>
 </body>

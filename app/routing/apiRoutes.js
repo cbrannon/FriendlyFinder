@@ -17,28 +17,21 @@ module.exports = function(app) {
 
     app.post('/api/friends', function (req, res) {
         fs.readFile( path.join(__dirname, '../data', 'friends.js'), 'utf8', function (err, data) {
-            res.end(JSON.parse(data[0]));
-            console.log(JSON.parse(data[0]));
-            console.log(req.body);
+            let friendArray = JSON.parse(data);
+            friendArray.push(req.body);
+            res.end(JSON.stringify(friendArray));
+            res.end(fs.writeFile( path.join(__dirname, '../data', 'friends.js'), JSON.stringify(friendArray)));
         });
 
-        res.end(JSON.stringify(req.body));
-        // Saving the request method as a variable.
-        var requestData = "";
-        // When the server receives data, it will add it to requestData.
-        req.on("data", function(data) {
-            console.log(res);
-            requestData += data;
-            console.log("You just posted some data to the server!");
-            console.log("Your data was " + requestData);
-        });
-
-        // // When the request has ended...
-        // req.on("end", function() {
-        //     res.write("<html><head><title>Hello Noder!</title></head><body>");
-        //     res.write("<h1>Thank You!</h1>");
-        //     res.write("</body></html>");
-        //     res.end();
+        // res.end(JSON.stringify(req.body));
+        // // Saving the request method as a variable.
+        // var requestData = "";
+        // // When the server receives data, it will add it to requestData.
+        // req.on("data", function(data) {
+        //     console.log(res);
+        //     requestData += data;
+        //     console.log("You just posted some data to the server!");
+        //     console.log("Your data was " + requestData);
         // });
     });
 
