@@ -19,7 +19,7 @@
                 <h1 id="title">Survey Questions</h1>
                 <hr>
                 <h2>About You</h2>
-                <form action="http://localhost:8080" method="POST">
+                <form action="http://localhost:8080/api/friends" method="POST">
                     <div class="form-group">
                         <label for="name">Name (Required)</label>
                         <input type="text" class="form-control" id="name" aria-describedby="nameInput" required="true">
@@ -161,7 +161,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <h1 id="friend-name" style="word-wrap:break-word;">VENEOADOFHADIHADFO13342515145135351<h1>
+                <img id="friend-photo" src="https://vignette1.wikia.nocookie.net/starwars/images/4/49/AbominableChewbacca-SWT.png/revision/latest?cb=20131107054306" class="rounded mx-auto d-block">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -173,19 +174,45 @@
         $(document).ready(() => {
             $("#submit").on("click", (event) => {
                 event.preventDefault();
+                if (!$('#name').val() || !$('#photo').val()) {
+                    // tell them they cant submit b/c name is required
+                    if (!$('#photo').val()) {
+                        $("#photo").parent("div").addClass("has-warning");
+                        location.href = "#title";
+                    }
+
+                    if (!$('#name').val()) {
+                        $("#name").parent("div").addClass("has-warning");
+                        location.href = "#title";
+                    }
+
+                    return false;
+                } else {
+                    $("#name").parent("div").removeClass("has-warning");
+                    $("#photo").parent("div").removeClass("has-warning");
+                }
                 var userData = {
                     "name": $("#name").val(),
                     "photo": $("#photo").val(),
-                    "scores": [$("#question1").val()[0], $("#question2").val()[0], $("#question3").val()[0], $("#question4").val()[0],
-                               $("#question5").val()[0], $("#question6").val()[0], $("#question7").val()[0], $("#question8").val()[0],
-                               $("#question9").val()[0], $("#question10").val()[0]]
+                    "scores": []
                 }
-                console.log(userData);
+
+                function setScores() {
+                    for (var i = 1; i < 11; i++) {
+                        let currentID = "#question" + i;
+                        userData.scores.push(parseInt($(currentID).val()[0]));
+                    }
+                }
+                setScores();
+                
                 $.post("http://localhost:8080/api/friends", userData, function(data){
-                    console.log("Test");
+                    // console.log(data);
+                }).done(function(data) {
                     console.log(data);
+                    $("#friend-name").text(data.name);
+                    $("#friend-photo").attr("src", data.photo);
+                    $("#myModal").modal();
                 });
-                $("#myModal").modal();
             });
         });
     </script>
