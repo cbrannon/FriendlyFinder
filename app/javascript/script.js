@@ -18,6 +18,7 @@ $(document).ready(() => {
             $("#name").parent("div").removeClass("has-warning");
             $("#photo").parent("div").removeClass("has-warning");
         }
+
         var userData = {
             "name": $("#name").val(),
             "photo": $("#photo").val(),
@@ -25,9 +26,12 @@ $(document).ready(() => {
         }
 
         function setScores() {
+            $("#name").val("");
+            $("#photo").val("");
             for (var i = 1; i < 11; i++) {
                 let currentID = "#question" + i;
                 userData.scores.push(parseInt($(currentID).val()[0]));
+                $(currentID).prop('selectedIndex',0);
             }
         }
         
