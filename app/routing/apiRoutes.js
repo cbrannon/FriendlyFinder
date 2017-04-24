@@ -23,31 +23,23 @@ module.exports = function(app) {
             let friendSums = [];
             let friendMatch;
 
-            function findAllSums() {
-                friendArray.forEach(currentItem => {
-                    let currentSum = currentItem.scores.reduce((a, b) => parseInt(a) + parseInt(b), 0);
-                    friendSums.push(currentSum);
-                });
-                findClosest(currentSum, friendSums);
-            }
-
-            function findClosest(current, friends) {
+            function findClosestMatch() {
                 let closestDifference;
                 let closestIndex;
 
-                friends.forEach((currentItem, index) => {
-                    currentDifference = Math.abs(currentItem - current);
+                friendArray.forEach(currentItem => {
+                    let currentDifference = 0;
+                    
+                    currentItem.scores.forEach((currentItem, index) => {
+                        currentDifference+=Math.abs(currentItem-req.body.scores[index]);
+                    });
 
-                    if (closestDifference == undefined || currentDifference <= closestDifference) {
-                        closestDifference = currentDifference;
-                        closestIndex = index;
+                    if (closestDifference == undefined || closestDifference > currentDifference) {
+                        friendMatch=currentItem;
                     }
                 });
-                console.log(closestDifference);
-                friendMatch = friendArray[closestIndex];
             }
-
-            findAllSums();
+            findClosestMatch();
 
             friendArray.push(req.body);
             res.json(friendMatch);

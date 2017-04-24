@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="app/javascript/script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -170,51 +171,5 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(() => {
-            $("#submit").on("click", (event) => {
-                event.preventDefault();
-                if (!$('#name').val() || !$('#photo').val()) {
-                    // tell them they cant submit b/c name is required
-                    if (!$('#photo').val()) {
-                        $("#photo").parent("div").addClass("has-warning");
-                        location.href = "#title";
-                    }
-
-                    if (!$('#name').val()) {
-                        $("#name").parent("div").addClass("has-warning");
-                        location.href = "#title";
-                    }
-
-                    return false;
-                } else {
-                    $("#name").parent("div").removeClass("has-warning");
-                    $("#photo").parent("div").removeClass("has-warning");
-                }
-                var userData = {
-                    "name": $("#name").val(),
-                    "photo": $("#photo").val(),
-                    "scores": []
-                }
-
-                function setScores() {
-                    for (var i = 1; i < 11; i++) {
-                        let currentID = "#question" + i;
-                        userData.scores.push(parseInt($(currentID).val()[0]));
-                    }
-                }
-                setScores();
-                
-                $.post("http://localhost:8080/api/friends", userData, function(data){
-                    // console.log(data);
-                }).done(function(data) {
-                    console.log(data);
-                    $("#friend-name").text(data.name);
-                    $("#friend-photo").attr("src", data.photo);
-                    $("#myModal").modal();
-                });
-            });
-        });
-    </script>
 </body>
 </html>
