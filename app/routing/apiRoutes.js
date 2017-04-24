@@ -16,11 +16,8 @@ module.exports = function(app) {
     });
 
     app.post('/api/friends', function (req, res) {
-        // console.log(req.body);
         fs.readFile( path.join(__dirname, '../data', 'friends.js'), 'utf8', function (err, data) {
             let friendArray = JSON.parse(data);
-            let currentSum = req.body.scores.reduce((a, b) => parseInt(a) + parseInt(b), 0);
-            let friendSums = [];
             let friendMatch;
 
             function findClosestMatch() {
@@ -29,20 +26,21 @@ module.exports = function(app) {
 
                 friendArray.forEach(currentItem => {
                     let currentDifference = 0;
-                    
+
                     currentItem.scores.forEach((currentItem, index) => {
                         currentDifference+=Math.abs(currentItem-req.body.scores[index]);
                     });
 
                     if (closestDifference == undefined || closestDifference > currentDifference) {
+                        closestDifference=currentDifference;
                         friendMatch=currentItem;
                     }
                 });
+                res.json(friendMatch);
             }
+            
             findClosestMatch();
-
             friendArray.push(req.body);
-            res.json(friendMatch);
             res.end(fs.writeFile( path.join(__dirname, '../data', 'friends.js'), JSON.stringify(friendArray)));
         });
     });
