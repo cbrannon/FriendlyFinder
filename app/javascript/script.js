@@ -37,7 +37,7 @@ $(document).ready(() => {
         
         setScores();
         
-        $.post("http://localhost:8080/api/friends", userData, function(data){
+        $.post("/api/friends", userData, function(data){
             console.log(data);
         }).done(function(data) {
             console.log(data);

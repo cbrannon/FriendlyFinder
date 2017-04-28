@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const app = express();
 const fs = require("fs");
 const htmlRouter = express.Router();
 
@@ -12,11 +11,11 @@ module.exports = function(app) {
     app.use(bodyParser.json());
 
     app.get('/api/friends', function (req, res) {
-        res.sendFile(path.join(__dirname, '../data', 'friends.js'));
+        res.sendFile(path.join(__dirname, '..', 'data', 'friends.js'));
     });
 
     app.post('/api/friends', function (req, res) {
-        fs.readFile( path.join(__dirname, '../data', 'friends.js'), 'utf8', function (err, data) {
+        fs.readFile( path.join(__dirname, '..', 'data', 'friends.js'), 'utf8', function (err, data) {
             let friendArray = JSON.parse(data);
             let friendMatch;
 
@@ -40,7 +39,7 @@ module.exports = function(app) {
             }
             findClosestMatch();
             friendArray.push(req.body);
-            res.end(fs.writeFile( path.join(__dirname, '../data', 'friends.js'), JSON.stringify(friendArray)));
+            fs.writeFile( path.join(__dirname, '..', 'data', 'friends.js'), JSON.stringify(friendArray))
         });
     });
 }
