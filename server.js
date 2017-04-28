@@ -8,7 +8,7 @@ app.use( '/app', express.static( 'app' ) );
 require('./app/routing/htmlRoutes')(app);
 require('./app/routing/apiRoutes')(app);
 
-let PORT = process.env.PORT || 8080;
+let PORT = 80;
 
 app.listen(PORT , function() {
     console.log("Listening on port: " + PORT);
