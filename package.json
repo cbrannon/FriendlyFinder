@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/cbrannon/FriendlyFinder/issues"
   },
-  "homepage": "https://github.com/cbrannon/FriendlyFinder#readme"
+  "homepage": "https://github.com/cbrannon/FriendlyFinder#readme",
+  "engines": {
+    "node": "6.10.1"
+  }
 }
