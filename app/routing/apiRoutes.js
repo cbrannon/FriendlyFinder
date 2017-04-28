@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 const fs = require("fs");
-
+const htmlRouter = express.Router();
 
 module.exports = function(app) {
     // Add this line below
@@ -38,7 +38,6 @@ module.exports = function(app) {
                 });
                 res.json(friendMatch);
             }
-            
             findClosestMatch();
             friendArray.push(req.body);
             res.end(fs.writeFile( path.join(__dirname, '../data', 'friends.js'), JSON.stringify(friendArray)));
